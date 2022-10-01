@@ -87,7 +87,7 @@ class App extends React.Component {
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3 } = this.state;
     const { cardImage, cardRare, cardTrunfo, isSaveButtonDisabled } = this.state;
-    const { hasTrunfo } = this.state;
+    const { hasTrunfo, tasksList } = this.state;
     return (
       <div>
         <h1>Tryunfo</h1>
@@ -115,6 +115,20 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
         />
+        <h3>Favs Cards</h3>
+        {tasksList.map((item) => (
+          <Card
+            key={ item }
+            cardName={ item.cardName }
+            cardDescription={ item.cardDescription }
+            cardAttr1={ item.cardAttr1 }
+            cardAttr2={ item.cardAttr2 }
+            cardAttr3={ item.cardAttr3 }
+            cardImage={ item.cardImage }
+            cardRare={ item.cardRare }
+            cardTrunfo={ item.cardTrunfo }
+          />
+        ))}
       </div>
     );
   }
