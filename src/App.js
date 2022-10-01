@@ -15,6 +15,7 @@ class App extends React.Component {
       cardImage: '',
       cardRare: '',
       cardTrunfo: false,
+      hasTrunfo: false,
       isSaveButtonDisabled: true,
       tasksList: [],
     };
@@ -52,6 +53,13 @@ class App extends React.Component {
     }, () => this.enableSaveBtn());
   };
 
+  checkTrunfo = () => {
+    const { cardTrunfo } = this.state;
+    if (cardTrunfo) {
+      this.setState({ hasTrunfo: true });
+    }
+  };
+
   handleClick = () => {
     const { cardName, cardDescription, cardImage,
       cardAttr1, cardAttr2, cardAttr3, cardRare } = this.state;
@@ -71,13 +79,15 @@ class App extends React.Component {
       cardAttr2: 0,
       cardAttr3: 0,
       cardRare: '',
+      cardTrunfo: false,
     }));
+    this.checkTrunfo();
   };
 
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3 } = this.state;
     const { cardImage, cardRare, cardTrunfo, isSaveButtonDisabled } = this.state;
-
+    const { hasTrunfo } = this.state;
     return (
       <div>
         <h1>Tryunfo</h1>
@@ -90,6 +100,7 @@ class App extends React.Component {
           cardImage={ cardImage }
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
+          hasTrunfo={ hasTrunfo }
           isSaveButtonDisabled={ isSaveButtonDisabled }
           onInputChange={ this.onInputChange }
           onSaveButtonClick={ this.handleClick }
