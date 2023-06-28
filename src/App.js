@@ -84,6 +84,13 @@ class App extends React.Component {
     this.checkTrunfo();
   };
 
+  removeFavs = ({ target }) => {
+    const { tasksList } = this.state;
+    console.log(target.cardName);
+    const result = tasksList.filter((item) => item.cardName !== target.id);
+    this.setState({ tasksList: result });
+  };
+
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3 } = this.state;
     const { cardImage, cardRare, cardTrunfo, isSaveButtonDisabled } = this.state;
@@ -117,17 +124,27 @@ class App extends React.Component {
         />
         <h3>Favs Cards</h3>
         {tasksList.map((item) => (
-          <Card
-            key={ item }
-            cardName={ item.cardName }
-            cardDescription={ item.cardDescription }
-            cardAttr1={ item.cardAttr1 }
-            cardAttr2={ item.cardAttr2 }
-            cardAttr3={ item.cardAttr3 }
-            cardImage={ item.cardImage }
-            cardRare={ item.cardRare }
-            cardTrunfo={ item.cardTrunfo }
-          />
+          <div key={ item.name }>
+            <Card
+              key={ item.name }
+              cardName={ item.cardName }
+              cardDescription={ item.cardDescription }
+              cardAttr1={ item.cardAttr1 }
+              cardAttr2={ item.cardAttr2 }
+              cardAttr3={ item.cardAttr3 }
+              cardImage={ item.cardImage }
+              cardRare={ item.cardRare }
+              cardTrunfo={ item.cardTrunfo }
+            />
+            <button
+              type="button"
+              data-testid="delete-button"
+              onClick={ this.removeFavs }
+              id={ item.cardName }
+            >
+              Excluir
+            </button>
+          </div>
         ))}
       </div>
     );
